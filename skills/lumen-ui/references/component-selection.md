@@ -1,0 +1,101 @@
+# Component Selection and Composition
+
+Confirm each selected component and prop against the current Lumen package, MCP server, CLI, or
+component docs before implementation.
+
+The table below describes the full web catalog. Native adapters intentionally expose a smaller,
+platform-shaped component set. For React Native, SwiftUI, or Compose, confirm the component exists
+in that adapter and prefer its native state, navigation, icon, and accessibility conventions.
+
+## Choose by Intent
+
+| Intent | Start with |
+| --- | --- |
+| Primary or secondary action | `Button`, `ButtonLink`, `ButtonGroup` |
+| Copy arbitrary text or referenced content | `CopyButton` |
+| Labeled form control | `Field`, `Label`, `Input`, `Textarea`, `Select` |
+| Search or suggestion input | `SearchField`, `Autocomplete`, `Combobox`, `Command` |
+| Boolean or mode choice | `Checkbox`, `Switch`, `Toggle`, `ToggleGroup`, `RadioGroup` |
+| Compact metadata or status | `Badge`, `Marker`, `Pill`, `TagGroup` |
+| Inline guidance or feedback | `Alert`, `Callout`, `Note`, `Progress`, `ScrollProgress`, `Spinner`, `Skeleton` |
+| Transient feedback | `Toast`, `ToastViewport` |
+| Blocking decision | `Dialog`, `AlertDialog` |
+| Supplemental side surface | `Drawer`, `Sheet` |
+| Anchored supplemental content | `Popover`, `HoverCard`, `Tooltip` |
+| Navigation | `Breadcrumb`, `NavigationMenu`, `Tabs`, `Pagination`, `Sidebar` |
+| Long-form local navigation | `Anchor`, optionally paired with `ScrollProgress` |
+| Related code or command variants | `CodeTabs` |
+| Structured content | `Card`, `Item`, `Table`, `DataTable`, `Descriptions` |
+| Filter a data workspace or explain edits | `FilterBar`, `ChangeSummary` |
+| Metrics and visualization | `Stat`, `Sparkline`, or the chart selected in [data visualization](data-visualization.md) |
+| Hierarchical or large collections | `Tree`, `TreeGrid`, `VirtualList` |
+| Dates and planning | `Calendar`, `DatePicker`, `DateRangePicker`, `Schedule`, `Agenda` |
+| Media or identity | `Avatar`, `Image`, `CoverImage`, `AspectRatio` |
+| Compare before/after media | `ImageComparison` |
+| Dense workspace layout | `Resizable`, `ScrollArea`, `Toolbar`, `Separator` |
+| Empty or first-run state | `Empty` with one clear next action |
+| Unavailable page or region | `ErrorState` with user-safe context and an application-owned recovery action |
+
+## Common Product Compositions
+
+### Settings form
+
+Use a semantic form with `Field` + `Label` around each control. Group related fields with headings
+and supporting text. Put the primary save action at the end, show inline validation, and use a toast
+or alert only for submission-level feedback.
+
+### Application shell
+
+Use `Sidebar` or `NavigationMenu` for primary navigation, `Breadcrumb` for location when the
+hierarchy is deeper than one level, and one main landmark for page content. Keep mobile navigation
+reachable without duplicating conflicting active states.
+
+### Data workspace
+
+Use `SearchField` or `Command` for discovery, `FilterBar` for filter controls, `DataTable` for
+structured rows, `Pagination` for server-backed collections, and `Empty` or `Skeleton` for no-data
+and loading states. Use `ChangeSummary` when users need to review edits. Use `Resizable`
+only when side-by-side inspection materially helps the task.
+
+### Create or edit flow
+
+Use a full page for long or consequential workflows, `Sheet`/`Drawer` for supplemental editing, and
+`Dialog` for short focused tasks. Preserve entered state on validation errors and announce the
+result.
+
+### Dashboard
+
+Start from the decisions the user needs to make. Use `Stat` for one value and choose the chart with
+[data visualization](data-visualization.md), including comparison, distribution, matrix, daily
+activity, conversion, and balance-change views. Compose a metric card with `Card`, `Stat`, and a
+chart using `presentation="bare"` when the selected adapter supports it. Preserve the accessible
+data alternative. Use `Progress` for task completion and `Table` when exact records matter more
+than shape. Keep analysis and filtering in application code; avoid invented metrics.
+
+### Scheduling
+
+Compose `Schedule` with `Agenda`, `Calendar`, or date fields according to the task. Make event names,
+times, conflicts, selected state, and keyboard movement understandable without color alone.
+
+### Code examples
+
+Use `CodeTabs` for package-manager commands, language variants, or alternative configuration
+examples. Give each item a stable `value`, visible `label`, `code`, and optional `language`. Set a
+descriptive `ariaLabel`, and reuse a stable `storageKey` only when matching groups should persist
+and synchronize the reader's choice. Use `wrap={false}` for command lines that should scroll rather
+than wrap. Do not recreate tab activation, keyboard behavior, copy controls, or persistence.
+
+## Selection Tests
+
+Before adding a component, ask:
+
+1. Does it match the user's intent and information hierarchy?
+2. Is a simpler semantic element or smaller Lumen primitive enough?
+3. Does the current framework target expose it and its needed behavior?
+4. Are loading, empty, error, disabled, and responsive states accounted for?
+5. Can a keyboard and screen-reader user complete the same task?
+
+For web selection controls, `Select` is the default. Use `Combobox` for searchable options.
+`NativeSelect` is an explicit choice for a required browser or platform picker, not a shortcut for
+missing runtime setup. Preserve the custom control's native fallback. Native adapters retain their
+platform conventions.

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "lumen": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@santi020k/lumen-mcp@5.1.0"
+      ]
+    }
+  }
+}
