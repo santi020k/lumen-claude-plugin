@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "lumen-ui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Build accessible web and native interfaces from Lumen's real component contracts.",
   "author": {
     "name": "Santiago Molina",

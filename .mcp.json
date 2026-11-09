@@ -1,10 +1,10 @@
 {
   "mcpServers": {
     "lumen": {
-      "command": "npx",
+      "type": "stdio",
+      "command": "node",
       "args": [
-        "-y",
-        "@santi020k/lumen-mcp@5.2.0"
+        "${CLAUDE_PLUGIN_ROOT}/node_modules/@santi020k/lumen-mcp/bin/lumen-mcp.mjs"
       ]
     }
   }
