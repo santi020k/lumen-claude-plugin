@@ -1,7 +1,0 @@
-{
-  "name": "lumen-ui-claude-plugin",
-  "private": true,
-  "dependencies": {
-    "@santi020k/lumen-mcp": "5.2.0"
-  }
-}

@@ -4,11 +4,13 @@ Build, review, and migrate accessible Lumen interfaces across Astro, React, Web 
 React Native, SwiftUI, and Jetpack Compose.
 
 The plugin includes three skills, an optional reviewer agent, and the read-only Lumen MCP catalog.
-Claude Code installs the pinned catalog and its locked dependencies from the public npm registry
-when it installs or updates the plugin. The catalog runs locally with Node.js 20.20 or later
-and does not send tool inputs to an external service. No Lumen account or API key is required.
+Claude connects to the public Lumen MCP over HTTPS and sends catalog queries and tool arguments
+to `https://mcp.lumen.santi020k.com/mcp`. The service returns public documentation and does not
+persist tool arguments or responses. Do not include credentials, personal data, or private source
+in catalog queries. No Lumen account or API key is required. See the
+[Lumen privacy policy](https://lumen.santi020k.com/privacy).
 
-Install from the original Lumen marketplace in Claude Code:
+For a local catalog, install from the original Lumen marketplace in Claude Code:
 
 ```text
 /plugin install lumen-ui --marketplace santi020k/lumen

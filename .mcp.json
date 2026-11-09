@@ -1,11 +1,8 @@
 {
   "mcpServers": {
     "lumen": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        "${CLAUDE_PLUGIN_ROOT}/launch-mcp.mjs"
-      ]
+      "type": "http",
+      "url": "https://mcp.lumen.santi020k.com/mcp"
     }
   }
 }
